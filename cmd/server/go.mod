@@ -1,7 +1,13 @@
-module go-todo-api/cmd/server
+module todo/cmd/server
 
 go 1.16
 
-replace go-todo-api/pkg/server => ../../pkg/server
+replace (
+    todo/pkg/server => ../../pkg/server
+    todo/pkg/handler => ../../pkg/handler
+)
 
-require go-todo-api/cmd/server v0.0.1
+require (
+    todo/cmd/server v0.0.1
+    todo/cmd/handler v0.0.1
+)

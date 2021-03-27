@@ -1,7 +1,16 @@
 package main
 
-import "go-todo-api/pkg/server"
+import (
+	"log"
+	"todo/pkg/handler"
+	"todo/pkg/server"
+)
 
 func main() {
-	server.Server()
+	handlers := new(handler.Handler)
+
+	srv := new(server.Server)
+	if err := srv.Run("8086", handlers.InitRoutes()); err != nil {
+		log.Fatalf("server error: %s", err.Error())
+	}
 }

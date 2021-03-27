@@ -1,11 +1,6 @@
-module todo
+module handler
 
 go 1.16
-
-replace (
-	todo/pkg/handler => ./pkg/handler
-	todo/pkg/server => ./pkg/server
-)
 
 require (
 	github.com/gin-gonic/gin v1.6.3 // indirect
@@ -19,6 +14,4 @@ require (
 	golang.org/x/crypto v0.0.0-20210322153248-0c34fe9e7dc2 // indirect
 	golang.org/x/sys v0.0.0-20210326220804-49726bf1d181 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
-	todo/pkg/handler v0.0.1
-	todo/pkg/server v0.0.1
 )
