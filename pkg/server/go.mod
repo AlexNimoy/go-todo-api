@@ -1,3 +1,3 @@
-module todo/pkg/server
+module server
 
 go 1.16
