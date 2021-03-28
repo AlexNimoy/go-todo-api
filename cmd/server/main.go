@@ -1,7 +1,6 @@
 package main
 
 import (
-	"log"
 	"todo/pkg/handler"
 	"todo/pkg/repository"
 	"todo/pkg/server"
@@ -9,10 +8,13 @@ import (
 
 	_ "github.com/lib/pq"
 
+	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 )
 
 func main() {
+	logrus.SetFormatter(new(logrus.JSONFormatter))
+
 	db, err := repository.NewPostgresDB(
 		repository.Config{
 			Host:     viperEnvVariable("POSTGRES_HOST"),
@@ -24,7 +26,7 @@ func main() {
 		})
 
 	if err != nil {
-		log.Fatalf("Failed to init db: %s", err.Error())
+		logrus.Fatalf("Failed to init db: %s", err.Error())
 	}
 
 	repos := repository.NewRepository(db)
@@ -33,7 +35,7 @@ func main() {
 
 	srv := new(server.Server)
 	if err := srv.Run(viperEnvVariable("SERVER_PORT"), handlers.InitRoutes()); err != nil {
-		log.Fatalf("server error: %s", err.Error())
+		logrus.Fatalf("server error: %s", err.Error())
 	}
 }
 
@@ -44,7 +46,7 @@ func viperConfig(key string) string {
 	err := viper.ReadInConfig()
 
 	if err != nil {
-		log.Fatalf("Error while reading config file %s", err.Error())
+		logrus.Fatalf("Error while reading config file %s", err.Error())
 	}
 
 	return viper.GetString(key)
@@ -57,7 +59,7 @@ func viperEnvVariable(key string) string {
 	err := viper.ReadInConfig()
 
 	if err != nil {
-		log.Fatalf("Error while reading config file %s", err.Error())
+		logrus.Fatalf("Error while reading config file %s", err.Error())
 	}
 
 	return viper.GetString(key)
