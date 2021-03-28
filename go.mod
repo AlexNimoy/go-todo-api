@@ -4,15 +4,16 @@ go 1.16
 
 replace (
 	todo/pkg/handler => ./pkg/handler
+	todo/pkg/model => ./pkg/model
 	todo/pkg/repository => ./pkg/repository
 	todo/pkg/server => ./pkg/server
 	todo/pkg/service => ./pkg/service
-	todo/pkg/model => ./pkg/model
 )
 
 require (
 	github.com/armon/consul-api v0.0.0-20180202201655-eb2c6b5be1b6 // indirect
 	github.com/coreos/go-etcd v2.0.0+incompatible // indirect
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
 	github.com/gin-gonic/gin v1.6.3 // indirect
 	github.com/go-playground/validator/v10 v10.4.1 // indirect
@@ -40,8 +41,8 @@ require (
 	gopkg.in/ini.v1 v1.62.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	todo/pkg/handler v0.0.1
+	todo/pkg/model v0.0.1
 	todo/pkg/repository v0.0.1
 	todo/pkg/server v0.0.1
 	todo/pkg/service v0.0.1
-	todo/pkg/model v0.0.1
 )
