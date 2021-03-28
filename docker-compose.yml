@@ -1,0 +1,13 @@
+version: '3.5'
+
+services:
+  postgres:
+    env_file:
+      - .env
+    container_name: todo-db
+    image: postgres:13
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5436:5432"
