@@ -7,6 +7,7 @@ replace (
 	todo/pkg/repository => ./pkg/repository
 	todo/pkg/server => ./pkg/server
 	todo/pkg/service => ./pkg/service
+	todo/pkg/model => ./pkg/model
 )
 
 require (
@@ -42,4 +43,5 @@ require (
 	todo/pkg/repository v0.0.1
 	todo/pkg/server v0.0.1
 	todo/pkg/service v0.0.1
+	todo/pkg/model v0.0.1
 )
