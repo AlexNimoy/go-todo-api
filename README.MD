@@ -1,5 +1,9 @@
 # todo api CA example
 
+## Swagger
+
+`http://localhost:8085/swagger/index.html`
+
 ## .env
 
 ```
@@ -45,4 +49,12 @@ alias for
 alias for
 
 `docker-compose exec postgres psql -U develop`
+
+## Sawagger
+
+`https://github.com/swaggo/swag`
+
+### Generate docs
+
+`swag init -g cmd/server/main.go`
 

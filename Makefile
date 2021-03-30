@@ -14,3 +14,6 @@ db_cli:
 
 run_srv:
 	go run ./cmd/server/main.go
+
+gen_docs:
+	swag init -g handler.go -d ./pkg/handler

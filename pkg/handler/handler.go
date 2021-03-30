@@ -4,7 +4,22 @@ import (
 	"todo/pkg/service"
 
 	"github.com/gin-gonic/gin"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
+
+	_ "todo/docs"
 )
+
+// @title Todo App API
+// @version 1.0
+// @description API Server TodoList
+
+// @host localhost:8085
+// @BasePath /
+
+// @securityDefinitions.apikey ApiKeyAuth
+// @in header
+// @name Authorization
 
 type Handler struct {
 	service *service.Service
@@ -16,6 +31,9 @@ func NewHandler(service *service.Service) *Handler {
 
 func (h *Handler) InitRoutes() *gin.Engine {
 	router := gin.New()
+
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+
 	auth := router.Group("/auth")
 	{
 		auth.POST("/sign-up", h.signUp)
