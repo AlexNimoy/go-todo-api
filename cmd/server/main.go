@@ -1,12 +1,16 @@
 package main
 
 import (
+	"os"
+	"os/signal"
 	"todo/pkg/handler"
 	"todo/pkg/repository"
 	"todo/pkg/server"
 	"todo/pkg/service"
 
 	_ "github.com/lib/pq"
+
+	"syscall"
 
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
@@ -34,9 +38,20 @@ func main() {
 	handlers := handler.NewHandler(services)
 
 	srv := new(server.Server)
-	if err := srv.Run(viperEnvVariable("SERVER_PORT"), handlers.InitRoutes()); err != nil {
-		logrus.Fatalf("server error: %s", err.Error())
-	}
+
+	go func() {
+		if err := srv.Run(viperEnvVariable("SERVER_PORT"), handlers.InitRoutes()); err != nil {
+			logrus.Fatalf("server error: %s", err.Error())
+		}
+	}()
+
+	logrus.Printf("Server started at port: %s", viperEnvVariable("SERVER_PORT"))
+
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, syscall.SIGTERM, syscall.SIGINT)
+	<-quit
+
+	logrus.Printf("Server stoped")
 }
 
 func viperConfig(key string) string {
