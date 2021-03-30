@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"os"
 	"os/signal"
 	"todo/pkg/handler"
@@ -47,9 +48,17 @@ func main() {
 
 	logrus.Printf("Server started at port: %s", viperEnvVariable("SERVER_PORT"))
 
-	quit := make(chan os.Signal, 1)
+	quit := make(chan os.Signal)
 	signal.Notify(quit, syscall.SIGTERM, syscall.SIGINT)
 	<-quit
+
+	if err := srv.Shutdown(context.Background()); err != nil {
+		logrus.Errorf("Server error: %s", err.Error())
+	}
+
+	if err := db.Close(); err != nil {
+		logrus.Errorf("DB error: %s", err.Error())
+	}
 
 	logrus.Printf("Server stoped")
 }
