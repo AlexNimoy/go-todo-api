@@ -20,3 +20,7 @@ func (s *TodoListService) Create(userId int, list model.TodoList) (int, error) {
 func (s *TodoListService) GetAll(userId int) ([]model.TodoList, error) {
 	return s.repo.GetAll(userId)
 }
+
+func (s *TodoListService) GetById(userId, listId int) (model.TodoList, error) {
+	return s.repo.GetById(userId, listId)
+}
