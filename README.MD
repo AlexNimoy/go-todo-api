@@ -1,4 +1,4 @@
-# todo api CA example
+# Todo API Clear Architecture example
 
 ## Swagger
 
